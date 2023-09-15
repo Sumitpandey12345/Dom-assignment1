@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        h1{
+            text-align: center;
+            color: teal;
+            font-size: 80px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 20px;
+            text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+
+        }
+        #screen{
+          text-align: center;
+         margin-top: 20px;
+         justify-content: center;
+         font-size: 70px;
+        }
+        #content{
+            width: 50%;
+          display: grid;
+          grid-template-columns: repeat(3,1fr);
+          margin: auto;
+          margin-top: 50px;
+          gap: 20px;
+        }
+        #content > button{
+            font-size: 50px;
+            color: white;
+            background-color: teal;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="screen">0 : 0 : 0</div> -->
+    <h1>Stopwatch</h1>
+    <h3 id="screen"><span id="hr"></span>hr : <span id="min"></span>m : <span id="sec">0</span>s</h3>
+   <div id="content">
+    <button onclick="start()">Start</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="reset()">Reset</button>
+   </div>
+</body>
+<script>
+    let hr=document.querySelector("#hr")
+    let min=document.querySelector("#min")
+    let sec=document.querySelector("#sec")
+    let second = 0;
+    let minute=0;
+    let hour=0;
+    let running=false;
+    let timer
+    function start(){
+        if(!running)
+        {
+            timer=setInterval(function(){
+                   second++
+                   sec.textContent = second
+                   if(second==60){
+                        second=0;
+                        sec.textContent = second
+                        minute++
+                        min.textContent=minute;
+                    }
+                    if(minute==60)
+                    {
+                        minute=0;
+                        min.innerHTML=minute;
+                        hour++;
+                        hr.innerHTML=hour;
+                    }
+            }, 1000)
+            running=true;
+        };  
+    };
+    function pause()
+    {
+        running=false;
+         clearInterval(timer)
+    }
+    function reset()
+    {
+        running=false
+        second=0;
+        minute=0;
+        hour=0;
+        min.textContent=""
+        hr.innerHTML=""
+        sec.textContent=second;
+        clearInterval(timer)
+    }
+</script>
+</html>
