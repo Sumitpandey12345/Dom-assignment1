@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+        div{
+            width: auto;
+            display: flex;
+            justify-content: center;
+        }
+        div > img{
+            width: 100%;
+            height: 80vh;
+            object-fit: cover;
+        }
+     #cont{
+        display: flex;
+        justify-content: space-around;
+     }
+     #cont > button{
+        font-size: 100px;
+        background-color: blueviolet;
+        color: white;
+     }
+    </style>
+    </head>
+    <body>
+        <div><img src alt></div>
+        <div id="cont">
+            <button id="prev"> < </button>
+            <button id="autoSlide" onclick="stop()">Stop</button>
+            <button id="next" onclick="forward()"> > </button>
+        </div>
+
+    </body>
+    <script>
+  let imgArr = ["https://w0.peakpx.com/wallpaper/988/166/HD-wallpaper-lamborghini-car-sports-car-orange-racing.jpg","https://w0.peakpx.com/wallpaper/112/742/HD-wallpaper-pontiac-gto-artwork-1971-cars-muscle-cars-tuning-american-cars-retro-cars-pontiac.jpg","https://w0.peakpx.com/wallpaper/594/573/HD-wallpaper-chevrolet-camaro-muscle-cars-1971-cars-custom-tuning-retro-cars-chevrolet.jpg","https://w0.peakpx.com/wallpaper/497/397/HD-wallpaper-chevrolet-camaro-ss-muscle-car-chevrolet-camaro-cars-racing-new-2016-blue.jpg","https://w0.peakpx.com/wallpaper/440/406/HD-wallpaper-running-ultra-animals-horses-running-horse-animal.jpg","https://w0.peakpx.com/wallpaper/397/651/HD-wallpaper-brown-horses-animals-birds-field-horse-horses-nature-running-sun-sunset.jpg","https://w0.peakpx.com/wallpaper/846/421/HD-wallpaper-wild-horse-animal-bronze-brown-horse-running-stallion-wild.jpg","https://w0.peakpx.com/wallpaper/340/199/HD-wallpaper-white-horse-domestic-white-horse-run-animal-thumbnail.jpg","https://w0.peakpx.com/wallpaper/156/896/HD-wallpaper-motocross-motor-cross-bike-sport-motorcycle-dirt-jump.jpg","https://w0.peakpx.com/wallpaper/464/982/HD-wallpaper-of-person-riding-motocross-dirt-bike.jpg","https://w0.peakpx.com/wallpaper/106/750/HD-wallpaper-dirt-ride-new-tupac2x-bike-lovers-cool-creative-dirt-bike-flare-new-new-popular-smoke-trending.jpg","https://w0.peakpx.com/wallpaper/668/290/HD-wallpaper-ghost-rider-horse-riding.jpg","https://w0.peakpx.com/wallpaper/374/121/HD-wallpaper-ghost-rider-ghost-rider.jpg","https://w0.peakpx.com/wallpaper/808/662/HD-wallpaper-ghost-rider-dfsfd-sgsd.jpg",
+
+  ];
+  let autoslide = document.getElementById("autoSlide")
+let img = document.querySelector("img")
+let currentImg = 0
+let flag = true;
+  img.setAttribute("src",imgArr[currentImg])
+ 
+  let prev = document.getElementById("prev")
+  let next = document.getElementById("next")
+  let screen = document.getElementById("container")
+
+prev.addEventListener("click",function(){
+    flag=false;
+    currentImg--
+    if(currentImg<0){
+        currentImg=imgArr.length-1
+    }
+    img.setAttribute("src",imgArr[currentImg])
+    autoslide.innerText="Start"
+})
+
+ function forward(){
+    flag=false;
+    currentImg++
+    if(currentImg>=imgArr.length){
+        currentImg=0
+    }
+    img.setAttribute("src",imgArr[currentImg])
+    autoslide.innerText="Start"
+}
+setInterval(function(){
+    if(flag){
+        forward()
+        flag=true
+        autoslide.innerText="Stop"
+    }
+},1000)
+
+function stop(){
+if(flag){
+    flag=false;
+    autoslide.innerText="Start"
+}else{
+    flag=true;
+    autoslide.innerText="Stop"
+}
+}
+</script>
+</html>

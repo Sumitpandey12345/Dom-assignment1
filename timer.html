@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Timer</h1>
+    <input type="number" id="hr">
+    <input type="number" id="min">
+    <input type="number" id="sec">
+    <h3><span id="h"></span>h : <span id="m"></span>min : <span id="s"></span>s</h3>
+    <button onclick="start()">Start</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="reset()">Reset</button>
+</body>
+ <script>
+    let hour = document.getElementById("h")
+    let minute = document.getElementById("m")
+    let second = document.getElementById("s")
+    let inputHour = document.getElementById("hr")
+    let inputMinute = document.getElementById("min")
+    let inputSecond = document.getElementById("sec")
+    let timer;
+    let running = false
+   
+    function start(){
+    if(!running){
+        running = true
+        second.textContent = inputSecond.value
+        minute.textContent = inputMinute.value 
+        hour.textContent = inputHour.value
+        
+        let seconds = second.textContent
+            let minutes = minute.textContent;
+            let hours = hour.textContent;
+      timer =  setInterval(function(){
+            
+           if(minutes == 0 && hours > 0 && seconds == 0){
+            minutes=60
+            hours--
+            hour.textContent = hours;
+           }
+            if(seconds == 0 && minutes > 0){
+                seconds= 60;
+       
+                minutes--
+                minute.textContent = minutes
+                console.log(second)
+    }if(seconds == 0 && minutes==0 && hours ==0){
+        second.textContent = "";
+        minute.textContent = "";
+        hour.textContent = "";
+    }
+    else{
+        seconds--
+            second.textContent = seconds
+    }
+ },1000) 
+ }
+ inputHour.value=""
+        inputMinute.value="";
+        inputSecond.value="";
+}
+function pause(){
+    running=false;
+    clearInterval(timer)
+}
+function reset(){
+    running=false;
+    clearInterval(timer)
+       second.innerText = "";
+        minute.innerText = "";
+        hour.innerText = "";
+}
+ </script>
+</html>
