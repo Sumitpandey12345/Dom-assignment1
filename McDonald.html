@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            background-color: greenyellow;
+            height: 100%;
+            width: 100%;
+        }
+        h1{
+            text-align: center;
+            color: teal;
+        }
+        #cont{
+            display: flex;
+           justify-content: center;
+            width:100%;
+            margin: auto;
+            padding: 20px;
+        }
+       div > img{
+            text-align: center;
+            width: 150px;
+            margin-top: 20px;
+            margin: auto;
+            padding: 10px;
+        }
+        button{
+         margin-top: 20px;
+         color: aqua;
+         background-color: rebeccapurple;
+         font-size: 50px;
+         border: none;
+         border-radius: 50px;
+        }
+        label{
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+   <div>
+    <h1>Virtual McDonald's</h1>
+   
+    <input type="checkbox"  id="fries"> <label for="fries">French Fries</label><br>
+    <input type="checkbox" id="burger"> <label for="burger">Burger</label><br>
+    <input type="checkbox"  id="sandwitch"> <label for="sandwitch">Sandwitch</label><br>
+    <input type="checkbox"  id="sundae"> <label for="sundae">Chocolate Sundae</label><br>
+    <input type="checkbox"  id="momos"> <label for="momos">Fried Momos</label><br>
+    <input type="checkbox"  id="coffee"> <label for="coffee">Coffee</label><br>
+    <input type="checkbox"  id="hamburger"> <label for="hamBurger">HamBurger</label><br>
+    <button onclick="order()">Order-Food</button>
+
+<div id="cont">
+
+</div>
+   </div>
+</body>
+<script>
+    let imgObj = {
+      fries :  "https://cdn.pixabay.com/photo/2016/04/25/01/58/french-fries-1351062_1280.jpg",
+     burger :   "https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg",
+     sandwitch :   "https://cdn.pixabay.com/photo/2015/08/16/12/02/sandwich-890822_1280.jpg",
+     sundae :   "https://cdn.pixabay.com/photo/2017/09/25/05/16/food-2784025_1280.jpg",
+     momos :    "https://cdn.pixabay.com/photo/2020/09/21/12/41/food-5589931_1280.jpg",
+     coffee :   "https://cdn.pixabay.com/photo/2015/05/07/13/46/cappuccino-756490_1280.jpg",
+    hamburger :    "https://cdn.pixabay.com/photo/2017/04/04/16/26/hamburger-2201749_1280.jpg"
+    }
+   
+    let menu = []
+    let selected = document.querySelectorAll('input');
+
+    let screen = document.querySelector("#cont")
+    function order(){
+        let time = Math.floor(Math.random()*10000)
+        for(let item of selected){
+        if(item.checked){
+           menu.push(imgObj[item.getAttribute("id")])
+        }   
+    }
+    const orderProcess = new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            resolve()
+        }, time)
+    })
+    orderProcess.then(()=>{
+        let id = document.createElement("h1")
+        id.innerText = Math.floor(Math.random()*1000);
+        screen.append(id)
+        menu.map(function(ele){
+    let image = document.createElement("img")
+        image.src = ele
+        screen.append(image)
+    })
+
+    })
+    
+    }
+
+    
+</script>
+</html>

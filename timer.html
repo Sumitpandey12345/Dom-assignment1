@@ -20,7 +20,6 @@ text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30
           margin: auto;
           margin-top: 50px;
           gap: 20px;
-
         }
         #box > button{
             font-size: 50px;
@@ -41,8 +40,7 @@ text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30
         margin-left: 170px;
         display: grid;
         gap: 20px;
-        grid-template-columns: repeat(3,1fr) 
-        
+        grid-template-columns: repeat(3,1fr)
        }
       #inp > input{
         margin-top: 20px;
@@ -54,7 +52,6 @@ text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30
         background-color: aqua;
         border: null;
       }
-        
     </style>
 </head>
 <body>
@@ -80,19 +77,33 @@ text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30
     let inputSecond = document.getElementById("sec")
     let timer;
     let running = false
-   
+    let paused = false
     function start(){
+        if(!paused){
+            let secondValue =0
+        let minuteValue= 0
+        let newMinutes = 0
+        let hourValue= 0
+        if(inputSecond.value >=60){
+             secondValue = Number(inputSecond.value)%60;
+             minuteValue += Math.floor(Number(inputSecond.value)/60);
+        }
+        if(inputMinute.value >= 60 || minuteValue >= 60){
+            minuteValue += Number(inputMinute.value);
+            newMinutes = minuteValue% 60;
+            hourValue =Number(inputHour.value) + Math.floor(minuteValue/60);
+        }
+        second.textContent = (inputSecond.value >= 60)?secondValue: inputSecond.value
+        minute.textContent = (inputMinute.value >= 60)?newMinutes:((inputSecond.value >=60)?minuteValue+inputMinute.value:inputMinute.value)
+        hour.textContent = (inputMinute.value >=60)?hourValue+inputHour.value:inputHour.value
+       
+        }
     if(!running){
         running = true
-        second.textContent = inputSecond.value
-        minute.textContent = inputMinute.value 
-        hour.textContent = inputHour.value
-        
-        let seconds = second.textContent
+         let seconds = second.textContent
             let minutes = minute.textContent;
             let hours = hour.textContent;
       timer =  setInterval(function(){
-            
            if(minutes == 0 && hours > 0 && seconds == 0){
             minutes=60
             hours--
@@ -100,7 +111,6 @@ text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30
            }
             if(seconds == 0 && minutes > 0){
                 seconds= 60;
-       
                 minutes--
                 minute.textContent = minutes
                // console.log(second)
@@ -113,7 +123,7 @@ text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30
         seconds--
             second.textContent = seconds
     }
- },1000) 
+ },1000)
  }
  inputHour.value=""
         inputMinute.value="";
@@ -121,6 +131,7 @@ text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30
 }
 function pause(){
     running=false;
+    paused=true;
     clearInterval(timer)
 }
 function reset(){
@@ -132,3 +143,4 @@ function reset(){
 }
  </script>
 </html>
+
