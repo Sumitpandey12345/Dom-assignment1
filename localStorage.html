@@ -4,15 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #main{
+           display: flex;
+           justify-content: center;
+          
+        }
+        #child1{
+          display: flex;
+         justify-content: center;
+         margin-top: 30px;
+        }
+        #child2{
+            margin-top: 30px;
+          display: flex;
+         justify-content: center;
+        }
+        #child1 > input{
+            text-align: center;
+            padding: 20px;
+            font-size: 20px;
+            border-radius: 40%;
+            border: none;
+            background-color: rgb(58, 3, 110);
+            color: white;
+        }
+        #child2 > input{
+            text-align: center;
+            padding: 20px;
+            font-size: 20px;
+            border-radius: 40%;
+            border: none;
+            background-color: rgb(58, 3, 110);
+            color: white;
+        }
+       .btn{
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        margin-left: 80px;
+        padding: 10px;
+        font-size: 30px;
+        border-radius: 25%;
+        border: none;
+        background-color: teal;
+       }
+       #retri{
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        margin-left: 80px;
+        padding: 10px;
+        font-size: 30px;
+        border-radius: 25%;
+        border: none;
+        background-color: teal;
+       }
+       #ret{
+        margin-top: 20px;
+          display: flex;
+         justify-content: center;
+         margin-right: 80px;
+       }
+       #table{
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+       }
+       .tab1{
+        color: rgb(107, 36, 173);
+        font-size: 60px;
+       }
+       .tab2{
+        color: rgb(49, 2, 94);
+        font-size: 60px;
+       }
+    </style>
 </head>
 <body>
+   <div id="main">
     <form>
-        <input type="text" placeholder="Name" id="name" name="person">
-        <input type="number" placeholder="Age" id="age" name="years">
-        <button>Submit</button>
+       <div id="child1"><input type="text" placeholder="Name" id="name" name="person"></div><br>
+       <div id="child2"><input type="number" placeholder="Age" id="age" name="years"></div>
+        <button class="btn">Submit</button>
     </form>
-    <button id="retri">Retrieve</button>
-    <table>
+   </div>
+    <div id="ret"><button id="retri">Retrieve</button></div>
+    <table id="table">
 
     </table>
 </body>
@@ -31,10 +111,11 @@
         let tablerow = document.createElement("tr")
         let tabledata1 = document.createElement("td")
         let tabledata2 = document.createElement("td")
-
         tabledata1.innerText = localStorage.getItem("name")
         tabledata2.innerText = localStorage.getItem("age")
         tablerow.append(tabledata1,tabledata2)
+        tabledata1.className = "tab1"
+        tabledata2.className = "tab2"
         tbody.append(tablerow)
         table.append(tbody)
 
