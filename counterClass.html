@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main{
+            display: flex;
+            margin: auto;
+            margin-top: 20px;
+            justify-content: space-around;
+            width: 70%;
+        }
+        #screen{
+          text-align: center;
+          font-size: 80px;
+          font-family: Arial, Helvetica, sans-serif;
+         text-shadow:  rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+          text-decoration: solid;
+          color: teal;
+        }
+        button{
+            padding: 20px;
+            font-size: 20px;
+            border-radius: 50%;
+            color: aqua;
+            background-color: rgb(53, 0, 102);
+            border: none;
+           box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+        }
+    </style>
+</head>
+<body>
+   <h1 id="screen">0</h1>
+    <div id="main">
+        <button onclick="decrement()">Decrement</button>
+        <button onclick="stop()" id="btn">Stop</button>
+        <button onclick="increment()">Increment</button>
+    </div>
+</body>
+<script>
+    let stopbtn = document.getElementById("btn")
+    let flag = true
+    let count = 0;
+    let display = document.getElementById("screen")
+   function increment(){
+    flag = false;
+    count++
+    display.textContent = count
+    stopbtn.textContent = "Start"
+   }
+   function decrement(){
+    flag = false;
+    count--
+    display.textContent = count
+    stopbtn.textContent = "Start"
+   }
+   setInterval(()=>{
+     if(flag){
+        increment()
+       flag=true
+        stopbtn.textContent = "Stop"
+     }
+   },1000)
+  
+
+    function stop(){
+        if(flag){
+            flag=false;
+          stopbtn.textContent = "Start"
+        }else{
+            flag=true;
+            stopbtn.textContent = "Stop"
+        }
+      
+    }
+  </script>
+</html>
