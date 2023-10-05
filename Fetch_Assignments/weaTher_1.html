@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+          
+        }
+        #main{
+            margin-top: 30px;
+            display: block;
+            justify-content: space-between;
+            background-color: white;
+            width: 100%;
+            height: 600px;
+        }
+        #searchbar{
+            width: 90%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+          margin-left : 70px;
+           
+        }
+        #btn{
+            display: flex;
+            width: 500px;
+            height: 30px;
+            justify-content: space-around;
+        }
+        #search{
+            font-size: 25px;
+            width: 500px;
+            padding: 9px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border: none;
+        }
+        #inpbtn > button{
+           font-size: 25px;
+           padding: 10px;
+            color: white;
+            background-color: black;
+            border-radius: 10px;
+            border: none;
+            margin-top: 10px;
+        }
+        #btn > button{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            background-color: rgb(190, 185, 185); 
+            border: none;
+            margin-top: 10px; 
+        }
+       #formap{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 5px;
+        margin: auto;
+        height: 510px;
+        width: 90%;
+       }
+       #status{
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        background-color: rgb(245, 233, 233);
+          width: 500px;
+        height: 400px;
+        margin-top: 40px;
+       }
+       #status > :first-child{
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        color: rgb(59, 3, 110);
+       }
+       #status > :nth-child(2){
+        display: block;
+       margin: auto;
+       
+       }
+       #status > :nth-child(3){
+        font-family: Arial, Helvetica, sans-serif;
+         text-align: center;
+         color: rgb(58, 49, 49);
+       }
+       #status > :nth-child(4){
+        font-family: Arial, Helvetica, sans-serif;
+         text-align: center;
+         color: rgb(58, 49, 49);
+       }
+       #status > :nth-child(5){
+        font-family: Arial, Helvetica, sans-serif;
+         text-align: center;
+         color: rgb(58, 49, 49);
+       }
+       #status > :nth-child(6){
+        font-family: Arial, Helvetica, sans-serif;
+         text-align: center;
+         color: rgb(58, 49, 49);
+       }
+       #status > :nth-child(7){
+        font-family: Arial, Helvetica, sans-serif;
+         text-align: center;
+         color: rgb(58, 49, 49);
+       }
+     #map{
+        width: 600px;
+        height: 500px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+     }
+       
+    </style>
+</head>
+<body>
+    <div id="main">
+         <div id="searchbar">
+            <div id="inpbtn">
+                <input type="text" id="search" placeholder="Enter your city">
+                <button>Search</button>
+            </div>
+            <div id="btn"><button>Different Weather?</button>
+                 <button>Metric: C^,m/s</button>
+                 <button>Imperial: F^,mph</button></div><br>
+         </div>
+
+         <div id="formap">
+            <div id="status"></div>
+            <div id="map">
+                <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Tata%20nagar,&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://embedgooglemap.net/124/"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net"></a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+            </div>
+         </div>
+    </div>
+</body>
+<script>
+    let status = document.getElementById("status")
+    let input = document.getElementById("search")
+    let searchButton = document.querySelector("button")
+    let map = document.querySelector("iframe")
+    let apiKey = `bdd58ff0651e0fd9fcd029eac9895745`
+    searchButton.addEventListener("click",()=>{
+        map.setAttribute("src",`https://maps.google.com/maps?q=Tata%20nagar,${input.value}&t=&z=13&ie=UTF8&iwloc=&output=embed`);
+        cityLocation();
+    })
+    async function cityLocation(){
+        let res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input.value}&appid=${apiKey}`)
+        let  data = await res.json()
+        //console.log(data)
+        getData(data[0])
+    }
+    async function getData(coordinates){
+        let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`)
+        let data = await res.json();
+        console.log(data)
+       displayData(data)
+    }
+    function displayData(weatherData){
+        let sunRise = new Date(weatherData.sys.sunrise*1000).toLocaleTimeString();
+        let sunSet =  new Date(weatherData.sys.sunset*1000).toLocaleTimeString();
+        let temp =  weatherData.main.temp
+        let mainTem = weatherData.main.feels_like
+        let feelslike =   (mainTem-273).toFixed(1)
+        status.innerHTML = ""
+        let city = document.createElement("h1");
+        let weatherImage = document.createElement("img");
+        weatherImage.src = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`
+        city.textContent = `${weatherData.name}, ${weatherData.sys.country}`
+       let temPrature = document.createElement("h2")
+       temPrature.textContent = (temp-273).toFixed(1)+" "+"C"
+       let feel = document.createElement("h3")
+       feel.textContent = `Feels like ${feelslike} C. Scattered clouds. Gentle Breeze`
+       let otherDetail = document.createElement("h3")
+       otherDetail.textContent = ` ${weatherData.wind.speed} m/s WNW, 
+                                   Humidity : ${weatherData.main.humidity}, Visibility : ${weatherData.visibility/1000}Km`
+
+
+    let sunRiseData = document.createElement("h2")
+    sunRiseData.textContent = `Sunrise : ${sunRise}`
+    let sunSetData = document.createElement("h2")
+    sunSetData.textContent = `Sunset : ${sunSet}`                                                                   
+    status.append(city,weatherImage,temPrature,feel,otherDetail,sunRiseData,sunSetData)
+                                                              
+    }
+   
+    
+</script>
+</html>

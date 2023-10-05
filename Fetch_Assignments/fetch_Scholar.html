@@ -107,7 +107,7 @@
        searchBtn.addEventListener("click",()=>{
         screen.innerHTML = ""
          let filtered = data.filter((ele)=>ele.title.toLowerCase().includes(input.value.toLowerCase()))
-         // console.log(filtered)
+          console.log(filtered)
           productData(filtered)
        }) 
        sort.addEventListener("click",()=>{
