@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
-            background-color: black;
-          
-        }
         #main{
-            margin-top: 30px;
+           
             display: block;
             justify-content: space-between;
             background-color: white;
             width: 100%;
-            height: 600px;
         }
         #searchbar{
             width: 90%;
@@ -59,7 +54,7 @@
         justify-content: space-around;
         margin-top: 5px;
         margin: auto;
-        height: 510px;
+        /* height: 510px; */
         width: 90%;
        }
        #status{
@@ -67,7 +62,7 @@
         background-color: rgb(245, 233, 233);
           width: 500px;
         height: 400px;
-        margin-top: 40px;
+        /* margin-top: 40px; */
        }
        #status > :first-child{
         font-family: Arial, Helvetica, sans-serif;
@@ -105,11 +100,27 @@
          color: rgb(58, 49, 49);
        }
      #map{
-        width: 600px;
-        height: 500px;
+        width: 500px;
+        height: 400px;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
      }
-       
+       iframe{
+        margin-right: 100px;
+       }
+       #forecast{
+          width: 80%;
+          display: flex;
+          justify-content: space-evenly;
+          margin: auto;
+          margin-top: 15px;
+          border-color: rgb(112, 42, 177);
+         
+       }
+       #card{
+        background-color: rgb(189, 178, 178);
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+          border-radius: 20px;
+       }
     </style>
 </head>
 <body>
@@ -127,12 +138,14 @@
          <div id="formap">
             <div id="status"></div>
             <div id="map">
-                <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Tata%20nagar,&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://embedgooglemap.net/124/"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net"></a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+                <div class="mapouter"><div class="gmap_canvas"><iframe width="500" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=Jamshedpur,&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://embedgooglemap.net/124/"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net"></a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
             </div>
          </div>
+         <div id="forecast"></div>
     </div>
 </body>
 <script>
+    let forecastStatus = document.getElementById("forecast")
     let status = document.getElementById("status")
     let input = document.getElementById("search")
     let searchButton = document.querySelector("button")
@@ -151,7 +164,7 @@
     async function getData(coordinates){
         let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`)
         let data = await res.json();
-        console.log(data)
+        //console.log(data)
        displayData(data)
     }
     function displayData(weatherData){
@@ -179,7 +192,40 @@
     let sunSetData = document.createElement("h2")
     sunSetData.textContent = `Sunset : ${sunSet}`                                                                   
     status.append(city,weatherImage,temPrature,feel,otherDetail,sunRiseData,sunSetData)
-                                                              
+         getForcastData(input.value)                                                     
+    }
+    async function getForcastData(city)
+    {
+     try {
+    let res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`) 
+            let data = await res.json()
+             console.log(data)
+             const forecastData=data.list.filter((ele,ind)=>ind%8===0)
+             console.log(forecastData)
+             forecastStatus.innerHTML = ``
+             forecastData.forEach(day => {
+                let date = new Date (day.dt_txt).toLocaleDateString()
+                let icon = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`
+                let temp = Math.round(day.main.temp-273)
+                let minTemp = Math.floor(day.main.temp_min-273)
+                let maxTemp = Math.floor(day.main.temp_max-273)
+                forecastStatus.innerHTML+=`
+                                  <br>
+                                  <div id="card">
+                                  <h4>${date}</h4>
+                                  <div id="forecastTempDiv">
+                                      <h2>${temp}°C</h2>
+                                      <img src="${icon}" alt="">
+                                  </div>
+                                  <hr>
+                                  <h3>Min-Temp:${minTemp}°C</h3>
+                                  <h3>Max-Temp:${maxTemp}°C</h3>
+                                </div>
+                `
+             });
+        } catch (error) {
+            console.log(error)
+        }
     }
    
     
